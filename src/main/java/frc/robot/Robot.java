@@ -139,9 +139,9 @@ public class Robot extends TimedRobot {
     /** This method is called periodically during autonomous. */
     @Override
     public void autonomousPeriodic() {
-        velocity = leftEncoder.getVelocity()*Constants.DISTANCE_PER_ROTATION*.1016*Math.PI/60; //m/s
+        velocity = leftEncoder.getVelocity()*((2 * 0.0508/*wheel radius*/ * Math.PI) / (8.142857/*gear ratio*/ * 60));
         logData(leftEncoder.getPosition(), rightEncoder.getPosition(), velocity, rightEncoder.getVelocity(), Math.toRadians(gyro.getAngle()), Math.toRadians(gyro.getRate()));
-
+ 
         SmartDashboard.putNumber("Velocity", velocity);
 
         if (velocity > 0.001 && kS == 0) {
